@@ -1,0 +1,397 @@
+/* =========================================================
+   tebanashi LP 補助スタイル
+   元 style.css の作り込まれた部品（hero / proposal-box / problem-item /
+   cta-container / problem-conclusion / features-title 等）を流用し、
+   新コンテンツ固有の要素（縦型動画・インフォ画像埋め込み・FAアイコン・
+   連鎖・比較）だけをここで補完する。
+   ========================================================= */
+
+/* 背景写真の主張を抑制: 新ストーリー部（上部）は不透明背景で固定写真を覆い、写真の主張を出さない。
+   「既存の管理システムと…」以降の元LPセクションは元の挙動のまま（一部の帯に固定写真が透ける）。 */
+#videos { background-color: #ffffff; }
+#reality { background-color: #ffffff; }
+#result { background-color: #E6F6F5; }
+#features { background-color: #ffffff; }
+
+/* CTAバンドはティールで強調（写真の代わりに面で見せる） */
+.lp-cta-band { background: linear-gradient(135deg, #08A599 0%, #007F75 100%); }
+.lp-cta-band .cta-container h3 { color: #ffffff; }
+
+/* ヒーロー: 「7割」ハイライト */
+.hero-em { color: #FFD23F; font-size: 1.2em; font-weight: 800; }
+
+/* ヒーロー右: 縦型動画フレームを中央寄せ */
+.hero-right { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+/* 動画フレーム共通 */
+.lp-video-frame {
+    position: relative; width: 100%; aspect-ratio: 16 / 9;
+    border-radius: 14px; overflow: hidden; background: #000;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .25);
+}
+.lp-video-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lp-video-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lp-video-frame--image { background: #E6F6F5; box-shadow: none; border: 2px solid rgba(0, 127, 117, .28); }
+/* ヒーロー動画は縦型(9:16)素材に合わせた縦フレーム（見切れ防止） */
+.lp-video-frame--portrait { aspect-ratio: 9 / 16; max-width: 280px; margin: 0 auto; background: #0b3b37; }
+/* 準備中プレースホルダー */
+.lp-video-frame--placeholder {
+    background: #E6F6F5; display: flex; align-items: center; justify-content: center;
+    color: #007F75; border: 2px dashed rgba(0, 127, 117, .4); box-shadow: none;
+}
+.lp-video-frame--placeholder i { font-size: 3rem; }
+.lp-video-badge {
+    position: absolute; top: 12px; right: 12px; background: #007F75; color: #fff;
+    font-size: .75rem; padding: 4px 12px; border-radius: 20px;
+}
+.lp-video-caption { text-align: center; margin: 14px 0 0; font-weight: 700; color: #fff; }
+.lp-video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 880px; margin: 24px auto 0; }
+.lp-video-label { text-align: center; margin: 12px 0 0; font-weight: 700; color: #333; }
+
+/* サブ見出し・リード */
+.lp-subheading { text-align: center; font-size: 1.15rem; color: #333; margin: 0 auto 24px; font-weight: 500; }
+.lp-lead { text-align: center; max-width: 760px; margin: 36px auto 28px; line-height: 1.9; color: #444; }
+.lp-lead strong { color: #CC0000; font-weight: 700; }
+
+/* インフォ画像埋め込み（タップ拡大＝既存ライトボックス連携） */
+.lp-info { max-width: 820px; margin: 0 auto; }
+.lp-info__img {
+    position: relative; cursor: zoom-in; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+}
+/* グローバルの img{max-width:640px} を上書きしてボックス幅いっぱいに表示（右余白防止） */
+.lp-info__img img { width: 100%; max-width: 100%; height: auto; display: block; }
+.lp-info__zoom {
+    position: absolute; bottom: 12px; right: 12px; background: rgba(0, 127, 117, .9);
+    color: #fff; font-size: .8rem; padding: 6px 12px; border-radius: 20px; pointer-events: none;
+}
+
+/* できること: 元 problem-item-left（本来は img）に FA アイコンを表示 */
+.problem-item-left .lp-feat-icon {
+    font-size: 3.4rem; color: #007F75; display: flex; align-items: center;
+    justify-content: center; width: 100%; min-height: 120px;
+}
+
+/* 気づかない現場: 元 proposal-list-icon（本来は img）に FA アイコン */
+.proposal-list-icon i { font-size: 1.8rem; color: #007F75; }
+
+/* その結果: 連鎖 */
+.lp-chain { max-width: 360px; margin: 0 auto 36px; list-style: none; padding: 0; text-align: center; }
+.lp-chain li {
+    background: #fff; border: 2px solid #007F75; color: #007F75; font-weight: 700;
+    padding: 13px; border-radius: 10px; position: relative; margin-bottom: 30px;
+}
+.lp-chain li:not(:last-child)::after {
+    content: "\f063"; font-family: "Font Awesome 6 Free"; font-weight: 900; color: #007F75;
+    position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%);
+}
+.lp-chain li:last-child { background: #CC0000; border-color: #CC0000; color: #fff; margin-bottom: 0; }
+
+/* 他社との違い */
+.lp-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 820px; margin: 24px auto 0; align-items: start; }
+.lp-compare__col { border-radius: 14px; padding: 30px 24px; text-align: center; }
+.lp-compare__col--other { background: #f0f0f0; color: #999; }
+.lp-compare__col--teba { background: linear-gradient(135deg, #08A599, #007F75); color: #fff; }
+.lp-compare__head { font-weight: 700; font-size: 1.1rem; margin: 0 0 18px; }
+.lp-compare__col--other .lp-compare__head { color: #777; }
+.lp-compare__big { font-size: 1.55rem; font-weight: 700; margin: 28px 0; }
+.lp-compare__note { font-size: .9rem; opacity: .85; margin: 0; }
+.lp-flow { list-style: none; padding: 0; margin: 0 0 14px; }
+.lp-flow li { background: rgba(255, 255, 255, .18); border-radius: 8px; padding: 9px; margin-bottom: 26px; font-weight: 700; position: relative; }
+.lp-flow li:not(:last-child)::after {
+    content: "\f063"; font-family: "Font Awesome 6 Free"; font-weight: 900;
+    position: absolute; bottom: -23px; left: 50%; transform: translateX(-50%); font-size: .8rem;
+}
+
+/* 無料相談フォーム幅 */
+.lp-contact__form { max-width: 780px; margin: 0 auto; }
+
+/* レスポンシブ（SP） */
+@media (max-width: 768px) {
+    .lp-video-grid { grid-template-columns: 1fr; }
+    .lp-compare { grid-template-columns: 1fr; }
+    .lp-video-frame--portrait { max-width: 230px; }
+    .problem-item-left .lp-feat-icon { min-height: 80px; font-size: 2.6rem; }
+    .lp-subheading { font-size: 1rem; }
+}
+
+/* New top story */
+.lp-top-hero,
+.lp-story-section,
+.lp-tebanashi-view {
+    color: #fff;
+    overflow: hidden;
+}
+
+.lp-top-hero {
+    background:
+        linear-gradient(90deg, rgba(0, 0, 0, .94) 0%, rgba(0, 0, 0, .76) 48%, rgba(0, 0, 0, .18) 100%),
+        #060606;
+    min-height: 720px;
+    padding: 130px 0 84px;
+}
+
+.lp-top-hero__inner,
+.lp-story-section__inner,
+.lp-tebanashi-view__inner {
+    width: min(1120px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+.lp-top-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
+    gap: 48px;
+    align-items: center;
+}
+
+.lp-top-hero__eyebrow,
+.lp-story-section__label {
+    color: #ff3030;
+    font-weight: 800;
+    letter-spacing: 0;
+    margin: 0 0 18px;
+}
+
+.lp-top-hero__title {
+    font-size: clamp(2.25rem, 5vw, 4.65rem);
+    line-height: 1.16;
+    letter-spacing: 0;
+    margin: 0;
+    color: #fff;
+}
+
+.lp-top-hero__lead {
+    color: rgba(255, 255, 255, .88);
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    line-height: 1.9;
+    margin: 28px 0 0;
+}
+
+.lp-top-hero__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 34px;
+}
+
+.lp-top-btn {
+    min-height: 58px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 8px;
+    padding: 14px 22px;
+    font-weight: 800;
+    line-height: 1.2;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.lp-top-btn:hover {
+    transform: translateY(-2px);
+    opacity: 1;
+}
+
+.lp-top-btn--primary {
+    background: #e60012;
+    color: #fff;
+    box-shadow: 0 14px 34px rgba(230, 0, 18, .38);
+}
+
+.lp-top-btn--secondary {
+    background: #fff;
+    color: #111;
+}
+
+.lp-top-hero__media,
+.lp-story-section__image {
+    border-radius: 8px;
+    overflow: hidden;
+    background: #151515;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+}
+
+.lp-top-hero__media img,
+.lp-story-section__image img,
+.lp-tebanashi-view__grid img {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.lp-top-hero__media {
+    min-height: 560px;
+}
+
+.lp-story-section {
+    padding: 104px 0;
+    background: #0b0b0b;
+}
+
+.lp-story-section--dark {
+    background: #080808;
+}
+
+.lp-story-section--red {
+    background: linear-gradient(135deg, #1a0204 0%, #6c0008 100%);
+}
+
+.lp-story-section--white {
+    background: #fff;
+    color: #111;
+}
+
+.lp-story-section__inner {
+    display: grid;
+    grid-template-columns: minmax(0, .92fr) minmax(320px, 1.08fr);
+    gap: 46px;
+    align-items: center;
+}
+
+.lp-story-section__inner--reverse {
+    grid-template-columns: minmax(320px, 1.08fr) minmax(0, .92fr);
+}
+
+.lp-story-section__inner--reverse .lp-story-section__text {
+    order: 2;
+}
+
+.lp-story-section__title,
+.lp-tebanashi-view__title {
+    font-size: clamp(1.85rem, 3.3vw, 3.15rem);
+    line-height: 1.28;
+    letter-spacing: 0;
+    margin: 0;
+}
+
+.lp-story-section__body {
+    font-size: clamp(1rem, 1.7vw, 1.25rem);
+    line-height: 1.95;
+    margin: 24px 0 0;
+    color: currentColor;
+    opacity: .9;
+}
+
+.lp-story-section__image {
+    min-height: 430px;
+}
+
+.lp-tebanashi-view {
+    background: #0a0a0a;
+    padding: 112px 0 96px;
+    text-align: center;
+}
+
+.lp-tebanashi-view__head {
+    max-width: 820px;
+    margin: 0 auto 42px;
+}
+
+.lp-tebanashi-view__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin: 0 auto;
+}
+
+.lp-tebanashi-view__grid img {
+    aspect-ratio: 3 / 4;
+    border-radius: 8px;
+    background: #181818;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, .32);
+}
+
+.lp-tebanashi-view__body {
+    max-width: 720px;
+    margin: 36px auto 0;
+    color: rgba(255, 255, 255, .9);
+    font-size: clamp(1rem, 1.8vw, 1.22rem);
+    line-height: 1.95;
+}
+
+.lp-tebanashi-view__cta {
+    margin-top: 34px;
+}
+
+@media (max-width: 900px) {
+    .lp-top-hero {
+        min-height: 0;
+        padding: 96px 0 64px;
+        background: #050505;
+    }
+
+    .lp-top-hero__inner,
+    .lp-story-section__inner,
+    .lp-story-section__inner--reverse {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .lp-story-section__inner--reverse .lp-story-section__text {
+        order: 0;
+    }
+
+    .lp-top-hero__media {
+        min-height: 420px;
+    }
+
+    .lp-story-section,
+    .lp-tebanashi-view {
+        padding: 72px 0;
+    }
+
+    .lp-story-section__image {
+        min-height: 360px;
+    }
+
+    .lp-tebanashi-view__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 540px) {
+    .lp-top-hero {
+        padding: 86px 0 56px;
+    }
+
+    .lp-top-hero__inner,
+    .lp-story-section__inner,
+    .lp-tebanashi-view__inner {
+        width: min(100% - 28px, 1120px);
+    }
+
+    .lp-top-hero__title {
+        font-size: 2.25rem;
+    }
+
+    .lp-top-hero__lead,
+    .lp-story-section__body,
+    .lp-tebanashi-view__body {
+        line-height: 1.82;
+    }
+
+    .lp-top-hero__buttons {
+        flex-direction: column;
+    }
+
+    .lp-top-btn {
+        width: 100%;
+        min-height: 56px;
+        padding: 14px 16px;
+    }
+
+    .lp-top-hero__media {
+        min-height: 330px;
+    }
+
+    .lp-story-section__image {
+        min-height: 290px;
+    }
+
+    .lp-tebanashi-view__grid {
+        gap: 10px;
+    }
+}
